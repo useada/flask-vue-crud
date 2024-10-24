@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000';
+const API_URL = 'http://127.0.0.1:5000';
 
 export default {
   // Busca todos os usuários
@@ -9,8 +9,8 @@ export default {
   },
   
   // Busca um usuário específico
-  getUser(username) {
-    return axios.get(`${API_URL}/user/${username}`);
+  getUser(user) {
+    return axios.get(`${API_URL}/user/${user}`);
   },
   
   // Adiciona um novo usuário
@@ -19,12 +19,12 @@ export default {
   },
   
   // Atualiza os dados de um usuário
-  updateUser(username, user) {
+  updateUser(user, username) {
     return axios.put(`${API_URL}/user/${username}`, user);
   },
   
   // Remove um usuário
-  deleteUser(username) {
-    return axios.delete(`${API_URL}/user/${username}`);
+  deleteUser(user) {
+    return axios.delete(`${API_URL}/user/${user}`);
   },
 };

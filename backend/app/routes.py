@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from .models import User
 from . import mongo
+from time import time
 
 main = Blueprint('main', __name__)
 
@@ -42,6 +43,9 @@ def user_operations(username):
         # Recebe dados JSON do cliente
         data = request.json
         updated_user = User.from_json(data)
+
+        # Atualiza o campo last_updated_at com o timestamp atual
+        updated_user.last_updated_at = time()
 
         # Verifica se o username já existe e não é do mesmo usuário
         if updated_user.username != username:
