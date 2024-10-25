@@ -1,24 +1,45 @@
-# frontend
+# Project CRUD USER VUE FLASK
 
-## Project setup
+## BACKEND
+
+### Enter the backend folder
 ```
-npm install
+cd backend/
 ```
 
-### Compiles and hot-reloads for development
+### Install pipenv
+```
+pip install pipenv
+```
+
+### Start environment
+```
+pipenv shell
+```
+
+### Install dependencies
+```
+pipenv install -r requirements.txt
+```
+
+### Start backend
+```
+python3 run.py 
+```
+
+## FRONTEND
+
+### Enter the frontend folder
+```
+cd frontend/
+```
+
+### Install dependencies
+```
+npm i
+```
+
+### Start frontend
 ```
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
