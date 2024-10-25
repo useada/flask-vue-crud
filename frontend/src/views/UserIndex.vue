@@ -1,8 +1,8 @@
 <template>
     <div class="container">
-      <h1>Lista de Usuários</h1>
+      <h1>User List</h1>
       <UserList />
-      <router-link to="/users/new" class="btn btn-success">Adicionar Usuário</router-link>
+      <router-link to="/users/new" class="btn btn-success">Add User</router-link>
     </div>
   </template>
   

@@ -1,45 +1,43 @@
 <template>
-    <div>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Username</th>
-            <th>Roles</th>
-            <th>Timezone</th>
-            <th>Active</th>
-            <th>Last Updated At</th>
-            <th>Created At</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="user in users" :key="user.user">
-            <td>{{ user.user }}</td>
-            <td>{{ formatRoles(user) }}</td>
-            <td>{{ user.user_timezone }}</td>
-            <td>{{ user.active ? 'Yes' : 'No' }}</td>
-            <td>{{ formatDate(user.last_updated_at) }}</td>
-            <td>{{ formatDate(user.created_at) }}</td>
-            <td>
-              <router-link :to="{ name: 'EditUser', params: { user: user.user } }" class="btn btn-info btn-sm">Editar</router-link>
-              <button @click="deleteUser(user.user)" class="btn btn-danger btn-sm">Excluir</button>
-              <button @click="showDetail(user)" class="btn btn-secondary btn-sm">Detalhar</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <UserDetail 
-        v-if="selectedUser" 
-        :user="selectedUser" 
-        :isVisible="!!selectedUser" 
-        @close="selectedUser = null" 
-      />
-    </div>
-
-    
-  </template>
+  <div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Roles</th>
+          <th>Timezone</th>
+          <th>Active</th>
+          <th>Last Updated At</th>
+          <th>Created At</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="user in users" :key="user.user">
+          <td>{{ user.user }}</td>
+          <td>{{ formatRoles(user) }}</td>
+          <td>{{ user.user_timezone }}</td>
+          <td>{{ user.active ? 'Yes' : 'No' }}</td>
+          <td>{{ formatDate(user.last_updated_at) }}</td>
+          <td>{{ formatDate(user.created_at) }}</td>
+          <td>
+            <router-link :to="{ name: 'EditUser', params: { user: user.user } }" class="btn btn-info btn-sm">Edit</router-link>
+            <button @click="deleteUser(user.user)" class="btn btn-danger btn-sm">Delete</button>
+            <button @click="showDetail(user)" class="btn btn-secondary btn-sm">Detail</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <UserDetail 
+      v-if="selectedUser" 
+      :user="selectedUser" 
+      :isVisible="!!selectedUser" 
+      @close="selectedUser = null" 
+    />
+  </div>
+</template>
   
-  <script>
+<script>
   import userService from '../service/userService';
   import UserDetail from '../components/UserDetail.vue';
   
@@ -61,7 +59,7 @@
             this.users = response.data;
           })
           .catch(error => {
-            console.error('Erro ao buscar usuários:', error);
+            console.error('Error when searching for users:', error);
           });
       },
       deleteUser(user) {
@@ -70,7 +68,7 @@
             this.fetchUsers();
           })
           .catch(error => {
-            console.error('Erro ao deletar usuário:', error);
+            console.error('Error deleting user:', error);
           });
       },
       showDetail(user) {
@@ -81,7 +79,7 @@
         if (user.is_user_admin) roles.push('Admin');
         if (user.is_user_manager) roles.push('Manager');
         if (user.is_user_tester) roles.push('Tester');
-        return roles.length ? roles.join(', ') : 'Nenhum'; 
+        return roles.length ? roles.join(', ') : 'None'; 
       },
       formatDate(dateString) {
       const date = new Date(dateString);
@@ -93,5 +91,5 @@
       this.fetchUsers();
     },
   };
-  </script>
+</script>
   

@@ -1,41 +1,41 @@
 <template>
   <div class="container">
-    <h1>{{ isEdit ? 'Atualizar Usuário' : 'Adicionar Usuário' }}</h1>
+    <h1>{{ isEdit ? 'Update User' : 'Add User' }}</h1>
 
-    <!-- Mensagem de erro -->
+    <!-- Error message -->
     <div v-if="errorMessage" class="alert alert-danger">
       {{ errorMessage }}
     </div>
     
-    <!-- Formulário de usuário -->
+    <!-- Userform -->
     <form @submit.prevent="onSubmit">
-      <!-- Campo Nome de Usuário -->
+      <!-- Username field -->
       <div class="form-group">
-        <label for="user">Nome de Usuário:</label>
+        <label for="user">Username:</label>
         <input
           type="text"
           id="user"
           v-model="form.user"
           class="form-control"
           required
-          placeholder="Digite o nome de usuário"
+          placeholder="Enter username"
         />
       </div>
 
-      <!-- Campo Senha -->
+      <!-- Password field -->
       <div class="form-group">
-        <label for="password">Senha:</label>
+        <label for="password">Password:</label>
         <input
           type="password"
           id="password"
           v-model="form.password"
           class="form-control"
           required
-          placeholder="Digite a senha"
+          placeholder="Enter password"
         />
       </div>
 
-      <!-- Checkbox para ativar/desativar usuário -->
+      <!-- Checkbox to activate/deactivate user -->
       <div class="form-group form-check">
         <input
           type="checkbox"
@@ -44,13 +44,13 @@
           class="form-check-input"
         />
         <label class="form-check-label" for="is_user_active">
-          Usuário Ativo
+          Active User
         </label>
       </div>
 
-      <!-- Grupo de checkboxes para as funções de administrador, gerente e testador -->
+      <!-- Group of checkboxes for administrator, manager and tester roles -->
       <div class="form-group">
-        <label>Funções do Usuário:</label>
+        <label>User Roles:</label>
         
         <div class="form-check">
           <input
@@ -72,7 +72,7 @@
             class="form-check-input"
           />
           <label class="form-check-label" for="is_user_manager">
-            Gerente
+            Manager
           </label>
         </div>
 
@@ -84,17 +84,17 @@
             class="form-check-input"
           />
           <label class="form-check-label" for="is_user_tester">
-            Testador
+            Tester
           </label>
         </div>
       </div>
 
-      <!-- Botões Salvar e Cancelar -->
+      <!-- Save and Cancel buttons -->
       <button type="submit" class="btn btn-primary">
-        Salvar
+        Save
       </button>
       <router-link to="/users" class="btn btn-secondary ml-2">
-        Cancelar
+        Cancel
       </router-link>
     </form>
   </div>
@@ -122,9 +122,8 @@ export default {
     };
   },
   methods: {
-    // Método de submit do formulário
     onSubmit() {
-      // Captura a timezone do navegador e adiciona ao objeto form
+      // Captures the browser timezone and adds it to the form object
       this.form.user_timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
       this.errorMessage = '';
@@ -136,7 +135,7 @@ export default {
             this.$router.push('/users');
           })
           .catch((error) => {
-            // Exibe a mensagem de erro se o backend retornar uma mensagem
+            // Display the error message if the backend returns a message
             this.errorMessage = error.response.data.error || 'Error updating user.';
             console.error('Error updating user:', error);
           });
@@ -147,14 +146,14 @@ export default {
             this.$router.push('/users');
           })
           .catch((error) => {
-            // Exibe a mensagem de erro se o backend retornar uma mensagem
+            // Display the error message if the backend returns a message
             this.errorMessage = error.response.data.error || 'Error adding user.';
             console.error('Error adding user.:', error);
           });
       }
     },
   },
-  // Verifica se está editando um usuário ou criando um novo
+  // Checks whether you are editing a user or creating a new one
   created() {
     if (this.$route.params.user) {
       this.isEdit = true;
