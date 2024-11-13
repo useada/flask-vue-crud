@@ -30,26 +30,26 @@ import { dispose, init, registerIndicator } from "klinecharts";
 import quoteService from '../service/quoteService';
 // import Layout from "../Layout.vue";
 
-const fruits = [
-  "🍏",
-  "🍎",
-  "🍐",
-  "🍊",
-  "🍋",
-  "🍌",
-  "🍉",
-  "🍇",
-  "🍓",
-  "🍈",
-  "🍒",
-  "🍑",
-  "🍍",
-  "🥥",
-  "🥝",
-  "🥭",
-  "🥑",
-  "🍏",
-];
+// const fruits = [
+//   "🍏",
+//   "🍎",
+//   "🍐",
+//   "🍊",
+//   "🍋",
+//   "🍌",
+//   "🍉",
+//   "🍇",
+//   "🍓",
+//   "🍈",
+//   "🍒",
+//   "🍑",
+//   "🍍",
+//   "🥥",
+//   "🥝",
+//   "🥭",
+//   "🥑",
+//   "🍏",
+// ];
 
 registerIndicator({
   name: "EMOJI",
@@ -57,7 +57,8 @@ registerIndicator({
   calc: (kLineDataList) => {
     return kLineDataList.map((kLineData) => ({
       emoji: kLineData.close,
-      text: fruits[Math.floor(Math.random() * 17)],
+      flag: kLineData.buy_open,
+      text: "🍏",
     }));
   },
   draw: ({ ctx, barSpace, visibleRange, indicator, xAxis, yAxis }) => {
@@ -67,6 +68,9 @@ registerIndicator({
     const result = indicator.result;
     for (let i = from; i < to; i++) {
       const data = result[i];
+      if (data.flag <= 0) {
+        continue;
+      }
       const x = xAxis.convertToPixel(i);
       const y = yAxis.convertToPixel(data.emoji);
       ctx.fillText(data.text, x, y);

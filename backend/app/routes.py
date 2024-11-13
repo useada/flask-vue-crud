@@ -96,7 +96,7 @@ def quote_bar():
         df['high'] = np.where(df['close'] > df['open'], df['close'], df['open'])
         df['low'] = np.where(df['close'] > df['open'], df['open'], df['close'])
 
-        columns_to_convert = ['timestamp', 'open', 'close', 'high', 'low', 'volume', 'amount']
+        columns_to_convert = ['timestamp', 'open', 'close', 'high', 'low', 'volume', 'amount', 'buy_open', 'buy_close', 'sell_open', 'sell_close']
 
         dict_list = dataframe_to_dict_list(df.fillna(0), columns_to_convert)
         
