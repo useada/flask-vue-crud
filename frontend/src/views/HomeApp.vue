@@ -2,6 +2,7 @@
   <div class="container">
     <h1>Welcome to the User Management System!</h1>
     <router-link to="/users" class="btn btn-primary">Manage Users</router-link>
+    <router-link to="/chart" class="btn btn-primary">Chart</router-link>
   </div>
 </template>
   

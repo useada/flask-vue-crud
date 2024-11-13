@@ -26,7 +26,8 @@
   
 <script>
 import { dispose, init, registerIndicator } from "klinecharts";
-import generatedDataList from "../generatedDataList";
+// import generatedDataList from "../generatedDataList";
+import quoteService from '../service/quoteService';
 // import Layout from "../Layout.vue";
 
 const fruits = [
@@ -88,7 +89,8 @@ registerIndicator({
     mounted: function () {
       this.chart = init("indicator-k-line");
       this.paneId = this.chart.createIndicator("VOL");
-      this.chart.applyNewData(generatedDataList());
+      // this.chart.applyNewData(generatedDataList());
+      this.fetchsBars();
     },
     methods: {
       setMainIndicator: function (name) {
@@ -97,9 +99,21 @@ registerIndicator({
       setSubIndicator: function (name) {
         this.chart.createIndicator(name, false, { id: this.paneId });
       },
+      fetchsBars() {
+        quoteService.getBars()
+          .then(response => {
+            this.bars = response.data;
+            this.chart.applyNewData(this.bars);
+          })
+          .catch(error => {
+            console.error('Error when searching for bars:', error);
+          });
+      },
     },
     unmounted: function () {
       dispose("indicator-k-line");
+    },
+    created() {
     },
   };
 </script>

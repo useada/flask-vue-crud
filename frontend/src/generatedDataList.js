@@ -20,10 +20,14 @@ export default function (
       }
       const volume = Math.random() * 50 + 10;
       const kLineData = {
-        open: prices[openIdx],
+        open: prices[0],
         low: prices[0],
         high: prices[3],
-        close: prices[closeIdx],
+        close: prices[3],
+        // open: prices[openIdx],
+        // low: prices[0],
+        // high: prices[3],
+        // close: prices[closeIdx],
         volume: volume,
         timestamp,
       };
